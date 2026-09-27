@@ -1,0 +1,44 @@
+{
+  "skill_name": "circuitikz",
+  "evals": [
+    {
+      "id": 0,
+      "name": "bridge-rectifier",
+      "prompt": "Draw this circuit in LaTeX circuitikz: a full-wave bridge rectifier — sinusoidal AC source, four diodes in a bridge configuration, smoothing capacitor across the output, load resistor, ground, and voltage labels on input and output.",
+      "expected_output": "Standalone .tex that compiles with tectonic; uses real circuitikz keys only; contains >=4 diodes, an AC source, a capacitor, a load resistor, a ground.",
+      "files": [],
+      "assertions": [
+        {"text": "tectonic compiles the figure with exit 0 and produces a PDF"},
+        {"text": "all component keys used (to[...] / node[...]) exist in the circuitikz manual (no invented names)"},
+        {"text": "circuit contains at least 4 diodes, an AC/sinusoidal source, >=1 capacitor, >=1 load resistor, and a ground"},
+        {"text": "voltage labels present on input and output (v= or explicit node labels)"}
+      ]
+    },
+    {
+      "id": 1,
+      "name": "common-emitter",
+      "prompt": "make a common-emitter BJT amplifier circuit in circuitikz: npn transistor, base bias divider (R1/R2), collector resistor to VCC rail, emitter resistor with bypass capacitor, input/output coupling capacitors, ground, labeled components and a current label on the collector.",
+      "expected_output": "Standalone .tex that compiles; npn as node-style; divider pair, Rc to vcc, Re with bypass C, coupling caps, ground, i= current label.",
+      "files": [],
+      "assertions": [
+        {"text": "tectonic compiles the figure with exit 0 and produces a PDF"},
+        {"text": "all component keys used exist in the circuitikz manual"},
+        {"text": "circuit has an npn transistor placed node-style, >=4 resistors (R1/R2 divider + Rc + Re), >=3 capacitors (2 coupling + 1 bypass), a VCC/supply node, and a ground"},
+        {"text": "a current label (i= with text) appears on the collector branch"}
+      ]
+    },
+    {
+      "id": 2,
+      "name": "mux-flipflop",
+      "prompt": "draw a circuitikz figure of a 2-to-1 multiplexer built from AND/OR/NOT gates, its output feeding a D flip-flop with a clock input, pin labels on the mux inputs (D0, D1, SEL) and Q on the flip-flop output.",
+      "expected_output": "Standalone .tex that compiles; american/european gate ports node-style; NOT gates for SEL inversion; D flip-flop (flipflop D or equivalent); labels D0/D1/SEL/Q present.",
+      "files": [],
+      "assertions": [
+        {"text": "tectonic compiles the figure with exit 0 and produces a PDF"},
+        {"text": "all component keys used exist in the circuitikz manual"},
+        {"text": "circuit contains >=2 AND gates, >=1 OR gate, >=1 NOT/inverter, and a D-type flip-flop"},
+        {"text": "labels D0, D1, SEL and Q all appear in the figure source"}
+      ]
+    }
+  ]
+}
