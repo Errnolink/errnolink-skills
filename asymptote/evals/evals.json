@@ -1,0 +1,44 @@
+{
+  "skill_name": "asymptote",
+  "evals": [
+    {
+      "id": 0,
+      "name": "damped-oscillation-plot",
+      "prompt": "Plot f(x)=e^{-x^2} cos(4x) over [-3,3] in Asymptote with labeled x/y axes, ticks, a blue curve, and a LaTeX label on the curve. Deliver a standalone .asy file that compiles to PDF.",
+      "expected_output": "figure.asy using import graph, graph(f,a,b), xaxis/yaxis with ticks, a LaTeX label; compiles with asy -f pdf.",
+      "files": [],
+      "assertions": [
+        {"text": "asy -f pdf compiles with exit 0 and produces figure.pdf"},
+        {"text": "uses import graph and graph(f,-3,3) style plotting (not hand-sampled draw loops)"},
+        {"text": "has xaxis/yaxis with tick objects and at least one LaTeX label"},
+        {"text": "no C++-isms that change semantics (postfix ++, integer / misuse)"}
+      ]
+    },
+    {
+      "id": 1,
+      "name": "vector-3d-surface",
+      "prompt": "Make an Asymptote 3D figure of the surface z = sin(x) cos(y) over [0,2pi]x[0,2pi] with a projection of my choice, compiled to a vector PDF (not rasterized), with axis labels.",
+      "expected_output": "figure.asy importing graph3, parametric/explicit surface with settings.render=0 (or -render 0) for vector output; compiles within reasonable time.",
+      "files": [],
+      "assertions": [
+        {"text": "asy -f pdf compiles within 180s and produces figure.pdf"},
+        {"text": "imports graph3 (or three+explicit surface constructor that exists)"},
+        {"text": "uses settings.render=0 or equivalent vector mode (no rasterization hang)"},
+        {"text": "surface actually draws sin(x)cos(y) (visible in code math)"}
+      ]
+    },
+    {
+      "id": 2,
+      "name": "flowchart-decision",
+      "prompt": "Draw a flowchart in Asymptote: Start (rectangle) flows into a diamond decision 'x > 0?'; Yes branch goes to 'compute sqrt(x)' box, No branch goes to 'error' box, both then flow into End (circle). Label the Yes/No arrows. Deliver a standalone .asy compiling to PDF.",
+      "expected_output": "figure.asy importing flowchart, block shapes with correct signatures, deferred connector wrapper, labeled arrows; compiles.",
+      "files": [],
+      "assertions": [
+        {"text": "asy -f pdf compiles with exit 0 and produces figure.pdf"},
+        {"text": "uses flowchart module blocks (rectangle/diamond/circle or equivalents) with valid signatures"},
+        {"text": "connectors drawn via the deferred add(new void(picture, transform)) wrapper or documented path routine"},
+        {"text": "Yes and No arrow labels present"}
+      ]
+    }
+  ]
+}
